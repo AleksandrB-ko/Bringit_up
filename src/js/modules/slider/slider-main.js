@@ -1,11 +1,10 @@
-export default class Slider {
-    constructor(page, btns) {
-        this.page = document.querySelector(page);
-        this.slides = this.page.children;
-        this.btns = document.querySelectorAll(btns);
-        this.slideIndex = 1;
-    }
+import Slider from './slider';
 
+export default class MainSlider extends Slider {
+    constructor(btns) {
+        super(btns);
+    }
+    
     showSlides(n) {
         if (n > this.slides.length) {
             this.slideIndex = 1;
@@ -23,17 +22,17 @@ export default class Slider {
                     this.hanson.style.opacity = '1';
                     this.hanson.classList.add('slideInUp');
 
-                },3000);
+                }, 3000);
             } else {
                 this.hanson.classList.remove('slideInUp');
             }
-        }catch(e){}
-        
+        } catch (e) { }
+
 
         this.slides.forEach(value => {
             value.style.display = 'none';
         });
-        
+
         this.slides[this.slideIndex - 1].style.display = 'block';
     }
 
@@ -45,7 +44,7 @@ export default class Slider {
         try {
             this.hanson = document.querySelector('.hanson');
         } catch (e) { }
-        
+
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
                 this.plusSlides(1);
@@ -54,7 +53,7 @@ export default class Slider {
                 e.preventDefault();
                 this.slideIndex = 1;
                 this.showSlides(this.slideIndex);
-            }); 
+            });
         });
         this.showSlides(this.slideIndex);
     }
